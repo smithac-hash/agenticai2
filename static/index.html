@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        CareerAI | Personalized Career Development Assistant
+    </title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+
+<body>
+
+<nav>
+
+    <div class="brand">
+        Career<span>AI</span>
+    </div>
+
+    <div>
+        AI-Powered Career Development Assistant
+    </div>
+
+</nav>
+
+
+<header class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            PERSONALIZED • CONSISTENT • ACTIONABLE
+        </p>
+
+        <h1>
+            Build your personalized
+            <span>career path.</span>
+        </h1>
+
+        <p>
+            Analyze your skills, discover career gaps,
+            generate a personalized day-wise learning roadmap
+            and prepare for interviews.
+        </p>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<section class="form-card">
+
+    <div class="section-title">
+
+        <h2>
+            Tell us about yourself
+        </h2>
+
+        <p>
+            CareerAI analyzes your profile and creates
+            a personalized learning plan.
+        </p>
+
+    </div>
+
+
+<form id="careerForm">
+
+
+<div class="grid">
+
+
+<label>
+
+    Full Name
+
+    <input
+        id="name"
+        placeholder="Enter your name"
+        required
+    >
+
+</label>
+
+
+
+<label>
+
+    Education
+
+    <input
+        id="education"
+        placeholder="e.g. B.E. Computer Science, 2nd Year"
+    >
+
+</label>
+
+
+
+<label>
+
+    Skills
+
+    <textarea
+        id="skills"
+        placeholder="Python, Java, React, SQL"
+        required
+    ></textarea>
+
+</label>
+
+
+
+<label>
+
+    Academic Interests
+
+    <textarea
+        id="interests"
+        placeholder="AI, Web Development, Data Science"
+        required
+    ></textarea>
+
+</label>
+
+
+
+<label>
+
+    Career Goal
+
+    <select
+        id="goal"
+        required
+    >
+
+        <option value="">
+            Select your target role
+        </option>
+
+        <option>
+            Software Developer
+        </option>
+
+        <option>
+            AI/ML Engineer
+        </option>
+
+        <option>
+            Data Analyst
+        </option>
+
+        <option>
+            Frontend Developer
+        </option>
+
+        <option>
+            Backend Developer
+        </option>
+
+        <option>
+            Data Scientist
+        </option>
+
+    </select>
+
+</label>
+
+
+
+<label>
+
+    Experience Level
+
+    <select id="experience">
+
+        <option>
+            Beginner
+        </option>
+
+        <option>
+            Intermediate
+        </option>
+
+        <option>
+            Advanced
+        </option>
+
+    </select>
+
+</label>
+
+
+
+<label>
+
+    Learning Plan Duration
+
+    <select id="planDays">
+
+        <option value="30">
+            30-Day Fast Track
+        </option>
+
+        <option value="60" selected>
+            60-Day Balanced Plan
+        </option>
+
+        <option value="90">
+            90-Day Complete Plan
+        </option>
+
+    </select>
+
+</label>
+
+
+</div>
+
+
+
+<label>
+
+    Projects (Optional)
+
+    <textarea
+        id="projects"
+        placeholder="Expense Tracker, Portfolio Website, ML Prediction Project"
+    ></textarea>
+
+</label>
+
+
+
+<button
+    id="analyzeBtn"
+    type="submit"
+>
+
+    ✨ Generate My Personalized Career Plan
+
+</button>
+
+
+</form>
+
+</section>
+
+
+
+<div
+    id="loading"
+    class="loading hidden"
+>
+
+    🧠 Analyzing your skills and creating your personalized roadmap...
+
+</div>
+
+
+
+<section
+    id="results"
+    class="hidden"
+>
+
+
+<div class="dashboard-head">
+
+    <div>
+
+        <p class="eyebrow">
+            YOUR PERSONALIZED REPORT
+        </p>
+
+        <h2 id="reportTitle">
+            Career Profile
+        </h2>
+
+    </div>
+
+
+    <button
+        class="secondary"
+        onclick="window.print()"
+    >
+
+        Print Report
+
+    </button>
+
+</div>
+
+
+
+<div class="score-grid">
+
+
+<div class="score-card">
+
+    <span>
+        Target Role
+    </span>
+
+    <strong id="targetRole"></strong>
+
+</div>
+
+
+
+<div class="score-card">
+
+    <span>
+        Career Match
+    </span>
+
+    <strong id="matchScore"></strong>
+
+</div>
+
+
+
+<div class="score-card">
+
+    <span>
+        Skill Completion
+    </span>
+
+    <strong id="completion"></strong>
+
+</div>
+
+
+</div>
+
+
+
+<div class="result-grid">
+
+
+<article class="panel wide">
+
+    <h3>
+        👤 Professional Summary
+    </h3>
+
+    <p id="summary"></p>
+
+</article>
+
+
+
+<article class="panel">
+
+    <h3>
+        💪 Current Strengths
+    </h3>
+
+    <div
+        id="strengths"
+        class="chips"
+    ></div>
+
+</article>
+
+
+
+<article class="panel">
+
+    <h3>
+        🎯 Skill Gaps
+    </h3>
+
+    <div
+        id="gaps"
+        class="chips"
+    ></div>
+
+</article>
+
+
+
+<article class="panel wide">
+
+    <h3>
+        📊 Career Suitability
+    </h3>
+
+    <div id="scores"></div>
+
+</article>
+
+
+
+<article class="panel wide">
+
+    <h3>
+        📅 Personalized Day-Wise Learning Roadmap
+    </h3>
+
+    <p id="roadmapIntro"></p>
+
+    <div
+        id="roadmap"
+        class="roadmap"
+    ></div>
+
+</article>
+
+
+
+<article class="panel">
+
+    <h3>
+        🚀 Recommended Projects
+    </h3>
+
+    <ul id="projectsList"></ul>
+
+</article>
+
+
+
+<article class="panel">
+
+    <h3>
+        🧠 Interview Preparation
+    </h3>
+
+    <div id="interview"></div>
+
+</article>
+
+
+
+<article class="panel wide note">
+
+    <h3>
+        🔗 Consistency Engine
+    </h3>
+
+    <p id="consistency"></p>
+
+</article>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+<script src="/static/script.js"></script>
+
+
+</body>
+
+</html>
